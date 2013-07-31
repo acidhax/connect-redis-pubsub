@@ -1,7 +1,7 @@
 {
   "name": "connect-redis-pubsub",
   "description": "Redis session store for Connect - with pub/sub!",
-  "version": "1.4.5",
+  "version": "2.0.0",
   "author": "Graham Kennery <graham@kennery.com>",
   "main": "./index.js",
   "dependencies": { "redis": "0.7.x", "debug": "*" },
