@@ -36,6 +36,12 @@ Unsubscribing:
 
     RedisStore.unsubscribe(sid, callback)
 
+
+## Future Plans
+
+  - Allow for one-time subscriptions (immediately unsubscribe once a the callback has been processed)
+  - Integrate the subscription model right on the session objects stored within request with proper EventEmitter functionality
+
 # License
 
   MIT
