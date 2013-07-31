@@ -4,8 +4,6 @@ connect-redis-pubsub is a Redis session store based on [connect-redis](https://g
 
 This module has the ability to subscribe to session changes based on the `sid` of a session. Anytime a session is modified, it will publish to the session's channel, and any client subscribed to that session, will receive the updated session information.
 
- connect-redis `>= 1.0.0` support only connect `>= 1.0.0`.
-
 ## Installation
 
 	  $ npm install connect-redis-pubsub
