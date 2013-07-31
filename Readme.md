@@ -1,12 +1,14 @@
-# Connect Redis
+# Connect Redis PubSub
 
 connect-redis-pubsub is a Redis session store based on [connect-redis](https://github.com/visionmedia/connect-redis) backed by [node_redis](http://github.com/mranney/node_redis). Requires redis >= `2.0.0` for the _SETEX_ command.
 
+This module has the ability to subscribe to session changes based on the `sid` of a session. Anytime a session is modified, it will publish to the session's channel, and any client subscribed to that session, will receive the updated session information.
+
  connect-redis `>= 1.0.0` support only connect `>= 1.0.0`.
 
-<!-- ## Installation
+## Installation
 
-	  $ npm install connect-redis -->
+	  $ npm install connect-redis-pubsub
 
 ## Options
   
@@ -22,11 +24,19 @@ connect-redis-pubsub is a Redis session store based on [connect-redis](https://g
 
 ## Usage
 
-    var connect = require('connect')
-	 	  , RedisStore = require('connect-redis')(connect);
+    var connect = require('connect'), 
+      RedisStore = require('connect-redis')(connect);
 
     connect()
-      .use(connect.session({ store: new RedisStore(options), secret: 'keyboard cat' }))
+      .use(connect.session({ store: new RedisStore(options), secret: 'disco cat' }))
+
+Subscribing:
+
+    RedisStore.subscribe(sid, callback)
+
+Unsubscribing:
+
+    RedisStore.unsubscribe(sid, callback)
 
 # License
 
