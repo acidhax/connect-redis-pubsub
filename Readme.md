@@ -23,7 +23,7 @@ This module has the ability to subscribe to session changes based on the `sid` o
 ## Usage
 
     var connect = require('connect'), 
-      RedisStore = require('connect-redis')(connect);
+      RedisStore = require('connect-redis-pubsub')(connect);
 
     connect()
       .use(connect.session({ store: new RedisStore(options), secret: 'disco cat' }))
@@ -36,11 +36,14 @@ Unsubscribing:
 
     RedisStore.unsubscribe(sid, callback)
 
+## Known Issues
+  - The session object seems to be getting set multiple times - causing multiple publishes - looking for a way to mitigate this.
 
 ## Future Plans
 
   - Allow for one-time subscriptions (immediately unsubscribe once a the callback has been processed)
   - Integrate the subscription model right on the session objects stored within request with proper EventEmitter functionality
+  - Write some tests for the pubsub
 
 # License
 
