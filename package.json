@@ -1,23 +1,29 @@
 {
   "name": "connect-redis-pubsub",
   "description": "Redis session store for Connect - with pub/sub!",
-  "keywords": ["redis", "connect", "session", "pubsub"],
+  "keywords": [
+    "redis",
+    "connect",
+    "session",
+    "pubsub"
+  ],
   "license": "MIT",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Graham Kennery <graham@kennery.com>",
   "main": "./index.js",
-  "dependencies": { 
-  	"redis": "0.7.x", 
-  	"debug": "*" 
+  "dependencies": {
+    "redis": "0.7.x",
+    "debug": "*",
+    "redis-sub": "~0.1.5"
   },
-  "devDependencies": { 
-  	"connect": "*" 
+  "devDependencies": {
+    "connect": "*"
   },
-  "engines": { 
-  	"node": "*" 
+  "engines": {
+    "node": "*"
   },
   "repository": {
-  	"type": "git",
-  	"url": "https://github.com/grahamkennery/connect-redis-pubsub"
+    "type": "git",
+    "url": "https://github.com/grahamkennery/connect-redis-pubsub"
   }
 }
