@@ -36,17 +36,25 @@ module.exports = function(connect) {
 		Store.call(this, options);
 		this.prefix = options.prefix || 'sess:';
 
-		this.client = options.client || new redis.createClient(options.port || options.socket, options.host, options);
-		this.subClient = options.subClient || new redis.createClient(options.port || options.socket, options.host, options);
-		this.pubsub = new RedisPubSub({
-			pubClient: this.cient,
-			subClient: this.subClient
-		});
 
-		if (options.pass) {
-			this.client.auth(options.pass, function(err){
-				if (err) throw err;
-			});    
+		if (options.pubsub) {
+			this.pubsub = options.pubsub;
+			this.client = this.pubsub.pubClient;
+			this.subClient = this.pubsub.subClient;
+		} else {
+			this.client = options.client || new redis.createClient(options.port || options.socket, options.host, options);
+			this.subClient = options.subClient || new redis.createClient(options.port || options.socket, options.host, options);
+
+			this.pubsub = new RedisPubSub({
+				pubClient: this.cient,
+				subClient: this.subClient
+			});
+
+			if (options.pass) {
+				this.client.auth(options.pass, function(err){
+					if (err) throw err;
+				});    
+			}
 		}
 
 		this.ttl =  options.ttl;
