@@ -10,6 +10,7 @@ This module has the ability to subscribe to session changes based on the `sid` o
 
 ## Options
   
+  - `pubsub` An instance of the redis-sub module
   - `client` An existing redis client object you normally get from `redis.createClient()`
   - `subClient` An existing redis client object that is going to ONLY be used for subscriptions
   - `host` Redis server hostname
@@ -36,11 +37,9 @@ Unsubscribing:
 
     RedisStore.unsubscribe(sid, callback)
 
-## Known Issues
-  - The session object seems to be getting set multiple times - causing multiple publishes - looking for a way to mitigate this.
-
 ## Future Plans
 
+  - EventEmitter style subscription handling
   - Allow for one-time subscriptions (immediately unsubscribe once a the callback has been processed)
   - Integrate the subscription model right on the session objects stored within request with proper EventEmitter functionality
   - Write some tests for the pubsub
