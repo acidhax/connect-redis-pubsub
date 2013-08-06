@@ -35,6 +35,7 @@ module.exports = function(connect) {
 		options = options || {};
 		Store.call(this, options);
 		this.prefix = options.prefix || 'sess:';
+		this.subscriptions = {};
 
 
 		if (options.pubsub) {
@@ -180,7 +181,7 @@ module.exports = function(connect) {
 	*/
 	RedisStore.prototype.subscribe = function(sid, cb) {
 		sid = this.prefix + sid;
-		this.pubsub.on(sid, function(data) {
+		var wrapper = function(data) {
 			if (data) {
 				try {
 					data = JSON.parse(data);
@@ -191,7 +192,9 @@ module.exports = function(connect) {
 			}
 
 			cb(data);
-		});
+		};
+		this.pubsub.on(sid, wrapper);
+		this.subscriptions[cb] = wrapper;
 	};
 
 
@@ -202,7 +205,9 @@ module.exports = function(connect) {
 	*/
 	RedisStore.prototype.unsubscribe = function(sid, cb) {
 		sid = this.prefix + sid;
-		this.pubsub.removeListener(sid, cb);
+		if (this.subscriptions[cb]) {
+			this.pubsub.removeListener(sid, this.subscriptions[cb]);
+		}
 	};
 
 	return RedisStore;

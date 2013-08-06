@@ -8,7 +8,7 @@
     "pubsub"
   ],
   "license": "MIT",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "author": "Graham Kennery <graham@kennery.com>",
   "main": "./index.js",
   "dependencies": {
