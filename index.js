@@ -180,7 +180,7 @@ module.exports = function(connect) {
 	*/
 	RedisStore.prototype.subscribe = function(sid, cb) {
 		sid = this.prefix + sid;
-		this.pubsub.on('sid', cb);
+		this.pubsub.on(sid, cb);
 	};
 
 
