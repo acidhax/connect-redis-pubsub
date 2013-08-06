@@ -207,6 +207,7 @@ module.exports = function(connect) {
 		sid = this.prefix + sid;
 		if (this.subscriptions[cb]) {
 			this.pubsub.removeListener(sid, this.subscriptions[cb]);
+			delete this.subscriptions[cb];
 		}
 	};
 
