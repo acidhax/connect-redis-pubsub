@@ -197,6 +197,28 @@ module.exports = function(connect) {
 		this.subscriptions[cb] = wrapper;
 	};
 
+	/**
+	* Subscribes to changes on a session only once.
+	* @param  {String} sid
+	* @param  {Function} cb
+	*/
+	RedisStore.prototype.subscribeOnce = function(sid, cb) {
+		sid = this.prefix + sid;
+		var wrapper = function(data) {
+			if (data) {
+				try {
+					data = JSON.parse(data);
+				}
+				catch(e) {
+					
+				}
+			}
+
+			cb(data);
+		};
+		this.pubsub.once(sid, wrapper);
+		this.subscriptions[cb] = wrapper;
+	};
 
 	/**
 	* Unsubscribes from changes on a session
